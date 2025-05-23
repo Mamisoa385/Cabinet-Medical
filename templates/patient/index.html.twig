@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Médicament{% endblock %}
+{% block title %}Patient index{% endblock %}
 
 {% block body %}
     <style>
@@ -143,7 +143,6 @@
             background: #f0f4fb;
         }
     </style>
-
 <header>
     <div class="header-container">
         <h1>Gestion Cabinet Médical</h1>
@@ -151,9 +150,11 @@
             <a href="{{ path('app_home') }}">
                 <span class="icon">🏠</span><span>Accueil</span>
             </a>
-            <a href="{{ path('app_patient_index') }}" href="#"><span class="icon">👩‍⚕️</span><span>Patients</span></a>
+            <a href="{{ path('app_patient_index') }}" class="active">
+                <span class="icon">👩‍⚕️</span><span>Patients</span>
+            </a>
             <a href="#"><span class="icon">🩺</span><span>Médecins</span></a>
-            <a href="{{ path('app_medicament_index') }}" class="active">
+            <a href="{{ path('app_medicament_index') }}">
                 <span class="icon">💊</span><span>Médicaments</span>
             </a>
             <a href="#"><span class="icon">📅</span><span>Rendez-vous</span></a>
@@ -161,40 +162,44 @@
         </nav>
     </div>
 </header>
-
-
 <main>
-    <table class="summary-table">
+    <table class="table">
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Nom</th>
-                <th>Déscription</th>
-                <th>Prix</th>
-                <th>Stock</th>
-                <th>Actions</th>
+                <th>Prenom</th>
+                <th>Date_naissance</th>
+                <th>Sexe</th>
+                <th>Telephone</th>
+                <th>Email</th>
+                <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for medicament in medicaments %}
+        {% for patient in patients %}
             <tr>
-                <td>{{ medicament.nom }}</td>
-                <td>{{ medicament.description }}</td>
-                <td>{{ medicament.prix }}</td>
-                <td>{{ medicament.stock }}</td>
+                <td>{{ patient.id }}</td>
+                <td>{{ patient.nom }}</td>
+                <td>{{ patient.prenom }}</td>
+                <td>{{ patient.dateNaissance ? patient.dateNaissance|date('Y-m-d') : '' }}</td>
+                <td>{{ patient.sexe }}</td>
+                <td>{{ patient.telephone }}</td>
+                <td>{{ patient.email }}</td>
                 <td>
-                    <a href="{{ path('app_medicament_show', {'id': medicament.id}) }}" class="btn btn-sm btn-info">Voir</a>
-                    <a href="{{ path('app_medicament_edit', {'id': medicament.id}) }}" class="btn btn-sm btn-warning">Modifier</a>
+                    <a href="{{ path('app_patient_show', {'id': patient.id}) }}">show</a>
+                    <a href="{{ path('app_patient_edit', {'id': patient.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6" class="text-center">Aucun médicament enregistré</td>
+                <td colspan="8">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_medicament_new') }}" class="btn btn-success">➕ Insérer un médicament</a>
+    <a href="{{ path('app_patient_new') }}">Create new</a>
 </main>
     <footer>
         &copy; {{ "now"|date("Y") }} Cabinet Médical - Tous droits réservés

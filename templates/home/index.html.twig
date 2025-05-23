@@ -205,7 +205,7 @@
             <a href="{{ path('app_home') }}" class="active">
                 <span class="icon">🏠</span><span>Accueil</span>
             </a>
-            <a href="#"><span class="icon">👩‍⚕️</span><span>Patients</span></a>
+            <a href="{{ path('app_patient_index') }}"><span class="icon">👩‍⚕️</span><span>Patients</span></a>
             <a href="#"><span class="icon">🩺</span><span>Médecins</span></a>
             <a href="{{ path('app_medicament_index') }}">
                 <span class="icon">💊</span><span>Médicaments</span>
@@ -261,7 +261,7 @@
         </section>
 
         <section class="grid" role="navigation" aria-label="Navigation principale">
-            <a href="/patients" class="card" title="Gérer les patients">
+            <a href="/patient" class="card" title="Gérer les patients">
                 <div class="card-icon">👩‍⚕️</div>
                 Patients
             </a>
