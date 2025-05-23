@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Liste des étudiants</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6fa; }
+        .container { max-width: 700px; margin: 40px auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 30px; }
+        h1 { color: #2c3e50; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: left; }
+        th { background: #3498db; color: #fff; }
+        tr:hover { background: #f1f1f1; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="/" style="display:inline-block;margin-bottom:20px;padding:8px 18px;background:#3498db;color:#fff;border-radius:6px;text-decoration:none;">&#8592; Retour à l'accueil</a>
+
+    <!-- Barre de recherche -->
+    <form id="searchForm" method="get" action="/etudiants/search" style="margin-bottom:20px; text-align:right;">
+        <input type="text" id="searchInput" name="q" placeholder="Rechercher un étudiant..." style="padding:7px 10px; border-radius:4px; border:1px solid #ccc;" />
+        <button type="submit" style="padding:7px 16px; border-radius:4px; background:#27ae60; color:#fff; border:none;">Rechercher</button>
+    </form>
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var value = document.getElementById('searchInput').value.trim();
+            if(value) {
+                window.location.href = '/etudiants/search/' + encodeURIComponent(value);
+            }
+        });
+    </script>
+
+    <h1>Liste des étudiants</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Nom du professeur</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if etudiants is not empty %}
+                {% for etudiant in etudiants %}
+                    <tr>
+                        <td>{{ etudiant.nom_etudiant|default('')|e }}</td>
+                        <td>{{ etudiant.nom_professeur|default('')|e }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr><td colspan="2" style="text-align:center;">Aucun étudiant trouvé.</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <!-- Pagination JS -->
+    <div id="pagination" style="text-align:center; margin-top:20px;"></div>
+    <script>
+        const rowsPerPage = 10;
+        const table = document.querySelector("table tbody");
+        const rows = Array.from(table.querySelectorAll("tr"));
+        const pagination = document.getElementById("pagination");
+        let currentPage = 1;
+        const nbPages = Math.ceil(rows.length / rowsPerPage);
+
+        function showPage(page) {
+            rows.forEach(row => row.style.display = "none");
+            const start = (page - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            rows.slice(start, end).forEach(row => row.style.display = "");
+            pagination.innerHTML = "";
+            for (let i = 1; i <= nbPages; i++) {
+                if (i === page) {
+                    pagination.innerHTML += "<strong style='margin:0 5px;'>" + i + "</strong>";
+                } else {
+                    pagination.innerHTML += "<a href='#' style='margin:0 5px;' onclick='showPage(" + i + ");return false;'>" + i + "</a>";
+                }
+            }
+        }
+        window.showPage = showPage;
+        if (rows.length > 0) showPage(1);
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gestion Cabinet Médical</title>
+    <style>
+        /* Reset léger */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: #f5f9ff;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background: #4a90e2;
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-weight: 700;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+        }
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex-grow: 1;
+        }
+        .welcome {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .welcome h2 {
+            font-size: 2rem;
+            color: #4a90e2;
+            margin-bottom: 0.5rem;
+        }
+        .welcome p {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 8px rgba(74, 144, 226, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .summary-table thead {
+            background-color: #4a90e2;
+            color: white;
+        }
+        .summary-table th, .summary-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .summary-table tbody tr:hover {
+            background-color: #f0f7ff;
+        }
+        /* Ligne horizontale de cartes */
+        .grid {
+            display: flex;
+            justify-content: center;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        .card {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(74, 144, 226, 0.15);
+            transition: box-shadow 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+            color: #4a90e2;
+            font-weight: 600;
+            font-size: 1.1rem;
+            user-select: none;
+            text-decoration: none;
+            flex: 1 1 150px;
+            max-width: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(74, 144, 226, 0.3);
+            color: #1a5bb8;
+        }
+        .card-icon {
+            font-size: 3.2rem;
+            margin-bottom: 0.8rem;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: auto;
+            background: #f0f4fb;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Gestion Cabinet Médical</h1>
+    </header>
+    <main>
+        <section class="welcome">
+            <h2>Bienvenue {{ message|default('') }}</h2>
+            <p>Centralisez et facilitez la gestion complète de votre cabinet médical : patients, médecins, médicaments, rendez-vous et ordonnances.</p>
+        </section>
+
+        <section class="summary">
+            <table class="summary-table" aria-label="Résumé des données principales">
+                <thead>
+                    <tr>
+                        <th>Catégorie</th>
+                        <th>Nombre d’éléments</th>
+                        <th>Dernière mise à jour</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Patients</td>
+                        <td>123</td>
+                        <td>19 mai 2025</td>
+                    </tr>
+                    <tr>
+                        <td>Médecins</td>
+                        <td>15</td>
+                        <td>18 mai 2025</td>
+                    </tr>
+                    <tr>
+                        <td>Médicaments</td>
+                        <td>85</td>
+                        <td>20 mai 2025</td>
+                    </tr>
+                    <tr>
+                        <td>Rendez-vous</td>
+                        <td>48</td>
+                        <td>20 mai 2025</td>
+                    </tr>
+                    <tr>
+                        <td>Ordonnances</td>
+                        <td>65</td>
+                        <td>19 mai 2025</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="grid" role="navigation" aria-label="Navigation principale">
+            <a href="/patients" class="card" title="Gérer les patients">
+                <div class="card-icon">👩‍⚕️</div>
+                Patients
+            </a>
+            <a href="/medecins" class="card" title="Gérer les médecins">
+                <div class="card-icon">🩺</div>
+                Médecins
+            </a>
+            <a href="/medicaments" class="card" title="Gérer les médicaments">
+                <div class="card-icon">💊</div>
+                Médicaments
+            </a>
+            <a href="/rendezvous" class="card" title="Gérer les rendez-vous">
+                <div class="card-icon">📅</div>
+                Rendez-vous
+            </a>
+            <a href="/ordonnances" class="card" title="Gérer les ordonnances">
+                <div class="card-icon">📝</div>
+                Ordonnances
+            </a>
+        </section>
+    </main>
+    <footer>
+        &copy; {{ "now"|date("Y") }} Cabinet Médical - Tous droits réservés
+    </footer>
+</body>
+</html>
