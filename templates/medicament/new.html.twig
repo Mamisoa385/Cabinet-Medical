@@ -92,6 +92,15 @@
     .btn:hover {
         opacity: 0.9;
     }
+
+    footer {
+            text-align: center;
+            padding: 1rem;
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: auto;
+            background: #f0f4fb;
+        }
 </style>
 
 <header>
@@ -119,4 +128,7 @@
 
     <a href="{{ path('app_medicament_index') }}" class="btn">← Retour</a>
 </main>
+<footer>
+        &copy; {{ "now"|date("Y") }} Cabinet Médical - Tous droits réservés
+    </footer>
 {% endblock %}

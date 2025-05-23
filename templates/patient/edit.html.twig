@@ -1,13 +1,162 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Patient{% endblock %}
+{% block title %}Modifier Patient{% endblock %}
 
 {% block body %}
-    <h1>Edit Patient</h1>
+<style>
+    body {
+        background: #f5f9ff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        padding: 0;
+        margin: 0;
+    }
 
-    {{ include('patient/_form.html.twig', {'button_label': 'Update'}) }}
+    header {
+        background: #4a90e2;
+        color: white;
+        padding: 1.2rem 2rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
 
-    <a href="{{ path('app_patient_index') }}">back to list</a>
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .header-container h1 {
+        font-size: 1.8rem;
+        margin: 0;
+    }
+
+    /* Menu horizontal avec icônes au-dessus */
+        nav {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.2s, color 0.3s;
+        }
+
+        nav a:hover {
+            transform: scale(1.05);
+        }
+
+        nav a .icon {
+            display: block;
+            font-size: 2.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        nav a.active {
+            color: #ffd700;
+        }
+
+    main {
+        max-width: 800px;
+        margin: 2rem auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(74, 144, 226, 0.1);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 2rem;
+    }
+
+    table th, table td {
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+    }
+
+    table th {
+        background-color: #f0f4fb;
+        width: 30%;
+    }
+
+    a.btn {
+        padding: 0.6rem 1rem;
+        margin-right: 1rem;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.2s ease;
+    }
+
+    a.btn-back {
+        background: #ccc;
+        color: #333;
+    }
+
+    a.btn-edit {
+        background: #f0ad4e;
+        color: white;
+    }
+
+    a.btn:hover {
+        opacity: 0.9;
+    }
+
+    footer {
+            text-align: center;
+            padding: 1rem;
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: auto;
+            background: #f0f4fb;
+        }
+</style>
+
+<header>
+    <div class="header-container">
+        <h1>Gestion Cabinet Médical</h1>
+        <nav>
+            <a href="{{ path('app_home') }}">
+                <span class="icon">🏠</span><span>Accueil</span>
+            </a>
+            <a href="{{ path('app_patient_index') }}"  class="active">
+                <span class="icon">👩‍⚕️</span><span>Patients</span>
+            </a>
+            <a href="#">
+                <span class="icon">🩺</span><span>Médecins</span>
+            </a>
+            <a href="{{ path('app_medicament_index') }}" class="active">
+                <span class="icon">💊</span><span>Médicaments</span>
+            </a>
+            <a href="#">
+                <span class="icon">📅</span><span>Rendez-vous</span>
+            </a>
+            <a href="#">
+                <span class="icon">📝</span><span>Ordonnances</span>
+            </a>
+        </nav>
+    </div>
+</header>
+<main>
+    <h1>Modifier Patient</h1>
+
+    {{ include('patient/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <a href="{{ path('app_patient_index') }}" class="btn btn-back">← Retour</a>
 
     {{ include('patient/_delete_form.html.twig') }}
+</main>
+<footer>
+        &copy; {{ "now"|date("Y") }} Cabinet Médical - Tous droits réservés
+</footer>
 {% endblock %}

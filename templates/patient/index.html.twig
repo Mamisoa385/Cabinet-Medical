@@ -163,10 +163,9 @@
     </div>
 </header>
 <main>
-    <table class="table">
+    <table class="summary-table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Date_naissance</th>
@@ -179,7 +178,6 @@
         <tbody>
         {% for patient in patients %}
             <tr>
-                <td>{{ patient.id }}</td>
                 <td>{{ patient.nom }}</td>
                 <td>{{ patient.prenom }}</td>
                 <td>{{ patient.dateNaissance ? patient.dateNaissance|date('Y-m-d') : '' }}</td>
@@ -187,19 +185,19 @@
                 <td>{{ patient.telephone }}</td>
                 <td>{{ patient.email }}</td>
                 <td>
-                    <a href="{{ path('app_patient_show', {'id': patient.id}) }}">show</a>
-                    <a href="{{ path('app_patient_edit', {'id': patient.id}) }}">edit</a>
+                    <a href="{{ path('app_patient_show', {'id': patient.id}) }}">Voir</a>
+                    <a href="{{ path('app_patient_edit', {'id': patient.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="8">Aucun Patient enregistré</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_patient_new') }}">Create new</a>
+    <a href="{{ path('app_patient_new') }}" class="btn btn-success">➕ Nouveau Patient</a>
 </main>
     <footer>
         &copy; {{ "now"|date("Y") }} Cabinet Médical - Tous droits réservés
