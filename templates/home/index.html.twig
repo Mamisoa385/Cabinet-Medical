@@ -4,41 +4,133 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Gestion Cabinet Médical</title>
-    <style>
-        /* Reset léger */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background: #f5f9ff;
-            color: #333;
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        header {
-            background: #4a90e2;
-            color: white;
-            padding: 1.5rem 2rem;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        header h1 {
-            font-weight: 700;
-            font-size: 2.2rem;
-            letter-spacing: 1px;
-        }
-        main {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-            flex-grow: 1;
-        }
-        .welcome {
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+        background: #f5f9ff;
+        color: #333;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    header {
+        background: #4a90e2;
+        color: white;
+        padding: 1.5rem 2rem;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    header h1 {
+        font-weight: 700;
+        font-size: 2.2rem;
+    }
+
+    /* Menu horizontal avec icônes au-dessus */
+    nav {
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
+
+    nav a {
+        text-align: center;
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: transform 0.2s, color 0.3s;
+    }
+
+    nav a:hover {
+        transform: scale(1.05);
+    }
+
+    nav a .icon {
+        display: block;
+        font-size: 2.2rem;
+        margin-bottom: 0.3rem;
+    }
+
+    nav a.active {
+        color: #ffd700;
+    }
+
+    main {
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        flex-grow: 1;
+    }
+
+    .summary-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 8px rgba(74, 144, 226, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .summary-table thead {
+        background-color: #4a90e2;
+        color: white;
+    }
+
+    .summary-table th, .summary-table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .summary-table tbody tr:hover {
+        background-color: #f0f7ff;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        border: none;
+        text-decoration: none;
+        font-weight: 600;
+        transition: background 0.3s, color 0.3s;
+        display: inline-block;
+        margin: 0.5rem 0;
+    }
+
+    .btn-sm {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.9rem;
+    }
+
+    .header-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .header-container h1 {
+        font-size: 1.8rem;
+        margin: 0;
+        flex-shrink: 0;
+    }
+
+    .header-container nav {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+     .welcome {
             text-align: center;
             margin-bottom: 3rem;
         }
@@ -47,33 +139,13 @@
             color: #4a90e2;
             margin-bottom: 0.5rem;
         }
-        .welcome p {
+    .welcome p {
             color: #666;
             font-size: 1.2rem;
             max-width: 600px;
             margin: 0 auto;
         }
-        .summary-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 3rem;
-            box-shadow: 0 4px 8px rgba(74, 144, 226, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .summary-table thead {
-            background-color: #4a90e2;
-            color: white;
-        }
-        .summary-table th, .summary-table td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        .summary-table tbody tr:hover {
-            background-color: #f0f7ff;
-        }
-        /* Ligne horizontale de cartes */
+    /* Ligne horizontale de cartes */
         .grid {
             display: flex;
             justify-content: center;
@@ -109,21 +181,40 @@
             font-size: 3.2rem;
             margin-bottom: 0.8rem;
         }
-        footer {
-            text-align: center;
-            padding: 1rem;
-            color: #999;
-            font-size: 0.9rem;
-            margin-top: auto;
-            background: #f0f4fb;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
-        }
-    </style>
+
+    .btn-info { background: #17a2b8; color: white; }
+    .btn-warning { background: #ffc107; color: black; }
+    .btn-success { background: #28a745; color: white; }
+
+    footer {
+        text-align: center;
+        padding: 1rem;
+        color: #999;
+        font-size: 0.9rem;
+        margin-top: auto;
+        background: #f0f4fb;
+    }
+</style>
 </head>
 <body>
-    <header>
+    
+<header>
+    <div class="header-container">
         <h1>Gestion Cabinet Médical</h1>
-    </header>
+        <nav>
+            <a href="{{ path('app_home') }}" class="active">
+                <span class="icon">🏠</span><span>Accueil</span>
+            </a>
+            <a href="#"><span class="icon">👩‍⚕️</span><span>Patients</span></a>
+            <a href="#"><span class="icon">🩺</span><span>Médecins</span></a>
+            <a href="{{ path('app_medicament_index') }}">
+                <span class="icon">💊</span><span>Médicaments</span>
+            </a>
+            <a href="#"><span class="icon">📅</span><span>Rendez-vous</span></a>
+            <a href="#"><span class="icon">📝</span><span>Ordonnances</span></a>
+        </nav>
+    </div>
+</header>
     <main>
         <section class="welcome">
             <h2>Bienvenue {{ message|default('') }}</h2>
@@ -178,7 +269,7 @@
                 <div class="card-icon">🩺</div>
                 Médecins
             </a>
-            <a href="/medicaments" class="card" title="Gérer les médicaments">
+            <a href="/medicament" class="card" title="Gérer les médicaments">
                 <div class="card-icon">💊</div>
                 Médicaments
             </a>
