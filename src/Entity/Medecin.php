@@ -36,9 +36,16 @@ class Medecin
     #[ORM\OneToMany(targetEntity: Rendezvous::class, mappedBy: 'medecin')]
     private Collection $rendezvouses;
 
+    /**
+     * @var Collection<int, Ordonnance>
+     */
+    #[ORM\OneToMany(targetEntity: Ordonnance::class, mappedBy: 'medecin')]
+    private Collection $ordonnances;
+
     public function __construct()
     {
         $this->rendezvouses = new ArrayCollection();
+        $this->ordonnances = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -130,6 +137,36 @@ class Medecin
             // set the owning side to null (unless already changed)
             if ($rendezvouse->getMedecin() === $this) {
                 $rendezvouse->setMedecin(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ordonnance>
+     */
+    public function getOrdonnances(): Collection
+    {
+        return $this->ordonnances;
+    }
+
+    public function addOrdonnance(Ordonnance $ordonnance): static
+    {
+        if (!$this->ordonnances->contains($ordonnance)) {
+            $this->ordonnances->add($ordonnance);
+            $ordonnance->setMedecin($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrdonnance(Ordonnance $ordonnance): static
+    {
+        if ($this->ordonnances->removeElement($ordonnance)) {
+            // set the owning side to null (unless already changed)
+            if ($ordonnance->getMedecin() === $this) {
+                $ordonnance->setMedecin(null);
             }
         }
 
