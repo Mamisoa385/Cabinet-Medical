@@ -151,13 +151,21 @@
             <a href="{{ path('app_home') }}">
                 <span class="icon">🏠</span><span>Accueil</span>
             </a>
-            <a href="{{ path('app_patient_index') }}" href="#"><span class="icon">👩‍⚕️</span><span>Patients</span></a>
-            <a href="#"><span class="icon">🩺</span><span>Médecins</span></a>
+            <a href="{{ path('app_patient_index') }}">
+                <span class="icon">👩‍⚕️</span><span>Patients</span>
+            </a>
+            <a href="{{ path('app_medecin_index') }}">
+                <span class="icon">🩺</span><span>Médecins</span>
+            </a>
             <a href="{{ path('app_medicament_index') }}" class="active">
                 <span class="icon">💊</span><span>Médicaments</span>
             </a>
-            <a href="#"><span class="icon">📅</span><span>Rendez-vous</span></a>
-            <a href="#"><span class="icon">📝</span><span>Ordonnances</span></a>
+            <a href="#">    
+                <span class="icon">📅</span><span>Rendez-vous</span>
+            </a>
+            <a href="#">
+                <span class="icon">📝</span><span>Ordonnances</span>
+            </a>
         </nav>
     </div>
 </header>

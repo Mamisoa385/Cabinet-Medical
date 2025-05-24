@@ -54,7 +54,7 @@ final class MedicamentController extends AbstractController
     public function edit(Request $request, Medicament $medicament, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(MedicamentForm::class, $medicament);
-        $form->handleRequest($request);
+        $form->handleRequest($request); 
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
